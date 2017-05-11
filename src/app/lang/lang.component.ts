@@ -30,15 +30,19 @@ import { LangService } from './lang.service';
 export class LangComponent implements OnInit {
   public locale: any;
   @Input() private storageName: string;
-  @Input() private apiUrl: string;
+  @Input() private apiLocales: string;
+  @Input() private apiLang: string;
 
   constructor(public lang: LangService) {
     this.locale = new Object();
   }
 
   ngOnInit() {
-    if (this.apiUrl) {
-      this.lang.setApiUrl(this.apiUrl);
+    if (this.apiLocales) {
+      this.lang.setApiLocales(this.apiLocales);
+    }
+    if (this.apiLang) {
+      this.lang.setApiLang(this.apiLang);
     }
     this.lang.getLocales()
     .then((data: any[]) => {
