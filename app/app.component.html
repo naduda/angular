@@ -1,0 +1,9 @@
+<div>
+  <app-lang [storageName]="'novasys'"></app-lang>
+  <hr>
+  <div *ngIf="langService.lang">
+    <h3>Test</h3>
+    <span>Should be menuFileExit translation: </span>
+    <span>{{langService.lang['menuFileExit']}}</span>
+  </div>
+</div>
