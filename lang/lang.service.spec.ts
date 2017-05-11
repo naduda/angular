@@ -17,6 +17,7 @@ describe('LangService', () => {
 
   it('should return locales',
     async(inject([LangService], (service: LangService) => {
+    service.setApiLocales('./assets/langMock/locales.json');
     service.getLocales().then(locales => {
       const en = locales.find(l => l.name === 'en');
       expect(locales.length).toBe(3);
@@ -27,6 +28,7 @@ describe('LangService', () => {
 
   it('should return File',
     async(inject([LangService], (service: LangService) => {
+    service.setApiLang('./assets/langMock/%s_lang.json');
     service.getMap('en').then(lang => {
       expect(service['menuFile']).toEqual('File');
     });

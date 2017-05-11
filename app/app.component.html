@@ -1,5 +1,8 @@
 <div>
-  <app-lang [storageName]="'novasys'" [apiUrl]="'./assets/langMock/'"></app-lang>
+  <app-lang [storageName]="'novasys'"
+            [apiLocales]="'./assets/langMock/locales.json'"
+            [apiLang]="'./assets/langMock/%s_lang.json'">
+  </app-lang>
   <hr>
   <div *ngIf="lang.ready">
     <h3>Test</h3>

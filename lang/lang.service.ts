@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { environment } from '../../environments/environment';
 import 'rxjs/Rx';
 
 @Injectable()
 export class LangService {
   private ready: boolean;
-  private langLocalesUrl: string = environment.langLocales;
-  private langUrl: string = environment.langUrl;
+  private langLocalesUrl: string;
+  private langUrl: string;
 
   private _locales: any[];
   private onChangeCallbacks: any[];
@@ -16,8 +15,12 @@ export class LangService {
     this.onChangeCallbacks = [];
   }
 
-  setApiUrl(url: string) {
+  setApiLang(url: string) {
     this.langUrl = url;
+  }
+
+  setApiLocales(url: string) {
+    this.langLocalesUrl = url;
   }
 
   public get locales() {
@@ -63,7 +66,7 @@ export class LangService {
       return Promise.resolve(null);
     } else {
       this.ready = false;
-      return this.http.get(this.langUrl + locale + '_lang.json')
+      return this.http.get(this.langUrl.replace('%s', locale))
       .toPromise().then(response => {
         const values = response.json();
         for (const key in values) {
