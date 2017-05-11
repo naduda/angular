@@ -19,7 +19,8 @@
     "commit": "git add *",
     "postcommit": "git commit -m 'deploy'",
     "predeploy": "npm run commit",
-    "deploy": "git checkout dev"
+    "deploy": "git push -u origin master",
+    "postdeploy": "git checkout dev"
   },
   "private": true,
   "dependencies": {
