@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prepush": "git commit -am '...'",
+    "prepush": "git commit -am 'deploy'",
     "push": "git push -u origin dev",
     "postpush": "npm run copySource",
     "precopySource": "git checkout master",
