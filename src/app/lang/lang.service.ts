@@ -4,7 +4,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class LangService {
-  private ready: boolean;
+  public ready: boolean;
   private langLocalesUrl: string;
   private langUrl: string;
 
