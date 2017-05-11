@@ -16,6 +16,10 @@ export class LangService {
     this.onChangeCallbacks = [];
   }
 
+  setApiUrl(url: string) {
+    this.langUrl = url;
+  }
+
   public get locales() {
     return this._locales;
   }

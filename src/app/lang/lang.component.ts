@@ -30,12 +30,16 @@ import { LangService } from './lang.service';
 export class LangComponent implements OnInit {
   public locale: any;
   @Input() private storageName: string;
+  @Input() private apiUrl: string;
 
   constructor(public lang: LangService) {
     this.locale = new Object();
   }
 
   ngOnInit() {
+    if (this.apiUrl) {
+      this.lang.setApiUrl(this.apiUrl);
+    }
     this.lang.getLocales()
     .then((data: any[]) => {
       const key: any = localStorage.getItem(this.storageName);
