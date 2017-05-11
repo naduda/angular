@@ -1,14 +1,18 @@
-import { LangPage } from './app.po';
+import { CommonPage } from './app.po';
 
-describe('lang App', () => {
-  let page: LangPage;
+describe('Common Module', () => {
+  let page: CommonPage;
 
   beforeEach(() => {
-    page = new LangPage();
+    page = new CommonPage();
+    page.navigateTo();
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+  it('should has correct title', () => {
+    expect(page.title()).toEqual('Common Module');
+  });
+
+  it('check translation', () => {
+    page.test();
   });
 });

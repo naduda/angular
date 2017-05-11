@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { environment } from '../../environments/environment';
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/Rx';
 
 @Injectable()
 export class LangService {
+  private ready: boolean;
   private langLocalesUrl: string = environment.langLocales;
   private langUrl: string = environment.langUrl;
 
   private _locales: any[];
-  private values: any;
   private onChangeCallbacks: any[];
 
   constructor(private http: Http) {
@@ -18,10 +18,6 @@ export class LangService {
 
   public get locales() {
     return this._locales;
-  }
-
-  public get lang() {
-    return this.values;
   }
 
   languageChange(locale) {
@@ -62,10 +58,17 @@ export class LangService {
     if (locale === undefined) {
       return Promise.resolve(null);
     } else {
+      this.ready = false;
       return this.http.get(this.langUrl + locale + '_lang.json')
       .toPromise().then(response => {
-        this.values = response.json();
-        return this.values;
+        const values = response.json();
+        for (const key in values) {
+          if (values.hasOwnProperty(key)) {
+            this[key] = values[key];
+          }
+        }
+        this.ready = true;
+        return Promise.resolve(null);
       })
       .catch(this.handleError);
     }
