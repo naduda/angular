@@ -18,7 +18,8 @@
     "precommit": "npm run removeSrc",
     "commit": "git add *",
     "postcommit": "git commit -m 'deploy'",
-    "deploy": "npm run commit"
+    "predeploy": "npm run commit",
+    "deploy": "git checkout dev"
   },
   "private": true,
   "dependencies": {
