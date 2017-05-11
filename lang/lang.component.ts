@@ -10,7 +10,7 @@ import { LangService } from './lang.service';
         <span>{{locale.text}}</span>
       </span>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <button *ngFor="let l of langService.locales"
+        <button *ngFor="let l of lang.locales"
           class="dropdown-item" (click)="changeLang(l)">
           <img src="{{l.ico}}" alt="{{l.name | uppercase}}"
             style="height: auto; width: 1rem;">
@@ -31,19 +31,19 @@ export class LangComponent implements OnInit {
   public locale: any;
   @Input() private storageName: string;
 
-  constructor(public langService: LangService) {
+  constructor(public lang: LangService) {
     this.locale = new Object();
   }
 
   ngOnInit() {
-    this.langService.getLocales()
+    this.lang.getLocales()
     .then((data: any[]) => {
       const key: any = localStorage.getItem(this.storageName);
       const loc = key ? JSON.parse(key).locale : data[0];
       this.locale = loc;
     })
     .then(() => {
-      this.langService.getMap(this.locale.name);
+      this.lang.getMap(this.locale.name);
     });
   }
 
@@ -53,8 +53,8 @@ export class LangComponent implements OnInit {
     const value = key ? JSON.parse(key) : new Object();
     value.locale = this.locale;
     localStorage.setItem(this.storageName, JSON.stringify(value));
-    this.langService.getMap(this.locale.name).then(lang => {
-      this.langService.languageChange(this.locale.name);
+    this.lang.getMap(this.locale.name).then(ready => {
+      this.lang.languageChange(this.locale.name);
     });
   }
 }

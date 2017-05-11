@@ -11,25 +11,27 @@ describe('LangService', () => {
     });
   });
 
-  it('should ...', inject([LangService], (service: LangService) => {
+  it('should inject', inject([LangService], (service: LangService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should return async locales',
+  it('should return locales',
     async(inject([LangService], (service: LangService) => {
     service.getLocales().then(locales => {
-      expect(locales.length).toBe(3);
       const en = locales.find(l => l.name === 'en');
+      expect(locales.length).toBe(3);
       expect((en.text as string).toLowerCase()).toEqual('english');
       expect((en.ico as string).toLowerCase()).toContain('enflag');
     });
   })));
 
-  it('should return async lang',
+  it('should return File',
     async(inject([LangService], (service: LangService) => {
     service.getMap('en').then(lang => {
-      expect(lang.menuFile).toEqual('File');
-      expect(lang['menuFile']).toEqual('File');
+      expect(service['menuFile']).toEqual('File');
+    });
+    service.getMap('uk').then(lang => {
+      expect(service['menuFile']).toEqual('Файл');
     });
   })));
 });
